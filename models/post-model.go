@@ -16,7 +16,6 @@ type Post struct {
 }
 
 type Author struct {
-	gorm.Model
 	Name string `json:"name"`
 	Posts pq.Int64Array `gorm:"type:integer[]"`
 }

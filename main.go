@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/wzslr321/gorm_postgresql/controllers"
 	"net/http"
 )
 
@@ -16,6 +17,8 @@ func main() {
 			},
 		)
 	})
+
+	r.GET("/api/posts", controllers.GetPosts)
 
 	_ = r.Run()
 }
