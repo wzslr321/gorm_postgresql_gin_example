@@ -19,6 +19,7 @@ func main() {
 	})
 
 	r.GET("/api/posts", controllers.GetPosts)
+	r.POST("/api/add/posts",controllers.AddPostsToDatabase)
 
 	_ = r.Run()
 }

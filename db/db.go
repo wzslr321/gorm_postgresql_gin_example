@@ -12,7 +12,7 @@ import (
 	"time"
 )
 var(
- Db,err = InitDB()
+ Db,_ = InitDB()
 )
 
 type Migrator interface {
@@ -66,7 +66,7 @@ func InitDB() (*gorm.DB,error){
 	)
 
 	db,err := gorm.Open(postgres.New(postgres.Config{
-		DSN: "user=postgres password=postgres dbname=react_golang port=5432 sslmode=disable TimeZone=Europe/Warsaw",
+		DSN: "user=<your_username> password=<your_password> dbname=<your_db_name> port=5432 sslmode=disable TimeZone=Europe/Warsaw",
 	}), &gorm.Config{
 		Logger: newLogger,
 	})
