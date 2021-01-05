@@ -12,7 +12,7 @@ import (
 	"time"
 )
 var(
- Db,_ = InitDB()
+	Db *gorm.DB
 )
 
 type Migrator interface {
@@ -43,18 +43,10 @@ type Migrator interface {
 	RenameIndex(dst interface{}, oldName, newName string) error
 }
 
-func setupMigration(db *gorm.DB) {
-	err := db.AutoMigrate(
-		&models.Post{},
-		&models.Author{},
-		&models.Comment{},
-	)
-	if err != nil {
-		log.Fatalln("Error occurred while executing function setupMigration")
-	}
-}
 
-func InitDB() (*gorm.DB,error){
+func InitDB() (){
+
+	var err error
 
 	newLogger := logger.New(
 		log.New(os.Stdout,"\r\n", log.LstdFlags),
@@ -65,8 +57,8 @@ func InitDB() (*gorm.DB,error){
 		},
 	)
 
-	db,err := gorm.Open(postgres.New(postgres.Config{
-		DSN: "user=<your_username> password=<your_password> dbname=<your_db_name> port=5432 sslmode=disable TimeZone=Europe/Warsaw",
+	Db, err = gorm.Open(postgres.New(postgres.Config{
+		DSN: "user=postgres password=postgres dbname=react_golang port=5432 sslmode=disable TimeZone=Europe/Warsaw",
 	}), &gorm.Config{
 		Logger: newLogger,
 	})
@@ -74,7 +66,7 @@ func InitDB() (*gorm.DB,error){
 		log.Panic("Failed connect to the database")
 	}
 
-	setupMigration(db)
-
-	return db,nil
+	_ = Db.AutoMigrate(
+		&models.Product{},
+	)
 }
