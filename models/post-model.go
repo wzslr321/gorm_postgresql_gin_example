@@ -1,26 +1,15 @@
 package models
 
 import (
-	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
 
-type Post struct {
+type Product struct {
 	gorm.Model
-	ID int `gorm:"primaryKey"`
 	Title string `json:"title"`
 	Description string `json:"description"`
-	Author Author `gorm:"-"`
-	Comments []Comment `gorm:"-"`
+	Price float32 `gorm:"-"`
+	ImageUrl string `gorm:"-"`
 }
 
-type Author struct {
-	Name string `json:"name"`
-	Posts pq.Int64Array `gorm:"type:integer[]"`
-}
-
-type Comment struct {
-	gorm.Model
-	Body string `json:"body"`
-}

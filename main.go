@@ -3,10 +3,13 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/wzslr321/gorm_postgresql/controllers"
+	util "github.com/wzslr321/gorm_postgresql/db"
 	"net/http"
 )
 
 func main() {
+
+	util.InitDB()
 
 	r := gin.Default()
 
